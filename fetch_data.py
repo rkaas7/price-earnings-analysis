@@ -1,5 +1,5 @@
 import yfinance as yf
-from datetime import datetime, timedelta
+from datetime import datetime
 
 def fetch_pe_data(symbol):
     ticker = yf.Ticker(symbol)
@@ -7,12 +7,29 @@ def fetch_pe_data(symbol):
     try:
         info = ticker.info
         name = info.get('shortName', symbol)
-        current_pe = info.get('trailingPE', None)
-        eps = info.get('trailingEps', None)
-    except:
-        name = symbol
-        current_pe, eps = None, None
+        #if symbol == 'BFFAF': 
+        #    print(info)
 
+        # Optional: Benchmarks benennen
+        if symbol == "SPY":
+            name = "S&P 500 (via SPY)"
+        elif symbol == "EXS1.DE":
+            name = "DAX (via EXS1.DE)"
+
+        trailing_pe = info.get('trailingPE', None)
+        forward_pe = info.get('forwardPE', None)
+        eps = info.get('trailingEps', None)
+    except Exception as e:
+        return {
+            "symbol": symbol,
+            "name": symbol,
+            "trailing_pe": None,
+            "forward_pe": None,
+            "avg_pe_10y": None,
+            "error": f"Fehler beim Laden: {e}"
+        }
+
+    # Historischer Durchschnitts-KGV aus approximierter Methode
     pe_ratios = []
     end = datetime.today()
 
@@ -32,6 +49,7 @@ def fetch_pe_data(symbol):
     return {
         "symbol": symbol,
         "name": name,
-        "current_pe": current_pe,
+        "trailing_pe": trailing_pe,
+        "forward_pe": forward_pe,
         "avg_pe_10y": avg_pe_10y
     }

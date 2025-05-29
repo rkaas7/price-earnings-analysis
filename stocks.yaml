@@ -1,19 +1,34 @@
 stocks:
   - WMT # Walmart
   - PG # Procter & Gamble
-  - ALIZF # Allianz
   - NKE # Nike
   - UNLYF # Unilever
   - HSY # The Hershey Company
   - KO # Coca Cola
-  - BFFAF # BASF
   - JNJ # Johnson and Johnson
   - BUDFF # AB InBev
   - VODPF # Vodafone
-  - O # Realty Income
-  - VICI # Vici Properties
-  - PLD # Prologis Inc
-  - VLKAF # Volkswagen
   - MMM # 3M
   - PEP # Pepsi Co
   - MDLZ # Mondelez
+  - CVX # Chevron
+  - CAT # Caterpillar 
+  - XOM # Exxon Mobil
+  - IBM # IBM
+  - LIN # Linde
+  - MCD # Mc Donalds
+
+# Note: REITS do not make sense (better to look at Funds from Operations (FFO))
+
+# limited data for german stocks with yfinance
+  - BFFAF # BASF
+  - VLKAF # Volkswagen
+  - ALIZF # Allianz
+  - DHL.DE # Deutsche Post
+  - SIX3.F # Sixt SE
+  - 4MUV2.TI # Munich Re
+  - DTE.DE # DEutsche Telekom
+
+# Benchmark indices
+  - SPY   # S&P 500 ETF
+  - EXS1.DE  # DAX ETF (XETRA)
