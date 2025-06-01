@@ -1,34 +1,35 @@
 stocks:
-  - WMT # Walmart
-  - PG # Procter & Gamble
-  - NKE # Nike
-  - UNLYF # Unilever
-  - HSY # The Hershey Company
-  - KO # Coca Cola
-  - JNJ # Johnson and Johnson
-  - BUDFF # AB InBev
-  - VODPF # Vodafone
-  - MMM # 3M
-  - PEP # Pepsi Co
-  - MDLZ # Mondelez
-  - CVX # Chevron
-  - CAT # Caterpillar 
-  - XOM # Exxon Mobil
-  - IBM # IBM
-  - LIN # Linde
-  - MCD # Mc Donalds
+  
+  - symbol: WMT # Walmart
+    long_term_avg_pe: 23.5
+
+  - symbol: PG # Procter & Gamble
+  - symbol: NKE # Nike
+  - symbol: UNLYF # Unilever
+  - symbol: HSY # The Hershey Company
+  - symbol: KO # Coca Cola
+  - symbol: JNJ # Johnson and Johnson
+  - symbol: MMM # 3M
+  - symbol: PEP # Pepsi Co
+  - symbol: MDLZ # Mondelez
+  - symbol: CVX # Chevron
+  - symbol: CAT # Caterpillar 
+  - symbol: XOM # Exxon Mobil
+  - symbol: IBM # IBM
+  - symbol: LIN # Linde
+  - symbol: MCD # Mc Donalds
+  - symbol: BUD # AB InBev
 
 # Note: REITS do not make sense (better to look at Funds from Operations (FFO))
 
 # limited data for german stocks with yfinance
-  - BFFAF # BASF
-  - VLKAF # Volkswagen
-  - ALIZF # Allianz
-  - DHL.DE # Deutsche Post
-  - SIX3.F # Sixt SE
-  - 4MUV2.TI # Munich Re
-  - DTE.DE # DEutsche Telekom
+  - symbol: BAS.DE # BASF
+  - symbol: VOW3.DE # Volkswagen
+  - symbol: ALV.DE # Allianz
+  - symbol: DHL.DE # Deutsche Post
+  - symbol: SIX3.F # Sixt SE
+  - symbol: DTE.DE # Deutsche Telekom
 
 # Benchmark indices
-  - SPY   # S&P 500 ETF
-  - EXS1.DE  # DAX ETF (XETRA)
+  - symbol: SPY # S&P 500 ETF
+  - symbol: EXS1.DE  # DAX ETF (XETRA)
