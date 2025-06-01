@@ -1,7 +1,6 @@
 import dash
-from dash import html, dcc
+from dash import html, dcc, Input, Output
 import plotly.graph_objs as go
-
 from read_yaml import read_stock_symbols
 from fetch_data import fetch_pe_data
 
@@ -17,8 +16,10 @@ DARK_GREEN = '#6FAF6E'
 
 LIGHT_GREY = '#f9f9f9'
 
+BAR_WIDTH = 0.20
+
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-app.title = "P/E analysis for Lifetime Investments (Trailing P/E, Forward P/E, Longterm avg. P/E)"
+app.title = "Price/Earnings analysis for Lifetime Investments"
 
 symbols = read_stock_symbols()
 data = [fetch_pe_data(sym) for sym in symbols]
@@ -28,9 +29,9 @@ def safe_value(v):
 
 def create_company_card(entry):
     fig = go.Figure(data=[
-        go.Bar(name='Trailing PE', x=[''], y=[safe_value(entry.get('trailing_pe'))], marker_color=DARK_BLUE),
-        go.Bar(name='Forward PE', x=[''], y=[safe_value(entry.get('forward_pe'))], marker_color= DARK_ORANGE),
-        go.Bar(name='Longterm Avg. PE', x=[''], y=[safe_value(entry.get('longterm_avg_pe'))], marker_color=DARK_GREEN)
+        go.Bar(name='Trailing PE', x=[''], y=[safe_value(entry.get('trailing_pe'))], marker_color=DARK_BLUE, width=BAR_WIDTH),
+        go.Bar(name='Forward PE', x=[''], y=[safe_value(entry.get('forward_pe'))], marker_color= DARK_ORANGE, width=BAR_WIDTH),
+        go.Bar(name='Longterm Avg. PE', x=[''], y=[safe_value(entry.get('longterm_avg_pe'))], marker_color=DARK_GREEN, width=BAR_WIDTH)
     ])
 
     company_name = entry.get('name', entry.get('symbol', 'unknown'))
@@ -39,11 +40,11 @@ def create_company_card(entry):
     fig.update_layout(
         barmode='group',
        title={
-            'text': f"<b>{company_name}</b><br><span style='font-size:11px; color:gray;'>Longterm PE: {source_info}</span>",
+            'text': f"<b>{company_name}</b><br><span style='font-size:13px; color:gray;'>Longterm PE: {source_info}</span>",
             'x': 0.5,
             'xanchor': 'center'
         },
-        height=280,
+        height=350,
         margin=dict(l=20, r=20, t=50, b=40),
         plot_bgcolor=LIGHT_GREY,
         paper_bgcolor=LIGHT_GREY,
@@ -55,7 +56,6 @@ def create_company_card(entry):
     return html.Div(
         dcc.Graph(figure=fig, config={'displayModeBar': False}),
         style={
-            'width': '15%', # 5 cards per line
             'display': 'inline-block',
             'boxShadow': '0 2px 6px rgba(0,0,0,0.08)',
             'borderRadius': '10px',
@@ -66,24 +66,60 @@ def create_company_card(entry):
         }
     )
 
+# dropdown options
+sectors = sorted(set(d.get("sector", "unknown") for d in data if d.get("sector")))
+indices = sorted(set(d.get("index", "unknown") for d in data if d.get("index")))
+
 app.layout = html.Div([
+    # heading
     html.H1(app.title, style={
         'fontFamily': 'Roboto, sans-serif',
         'textAlign': 'center',
         'padding': '20px 10px',
         'color': '#333'
     }),
-    html.Div(
-        [create_company_card(entry) for entry in data],
-        style={
-            'textAlign': 'center'
-        }
-    )
-], style={
-    'fontFamily': 'Roboto, sans-serif',
-    'backgroundColor': '#f0f2f5',
-    'padding': '20px'
-})
+    # dropdowns
+    html.Div([
+        html.Label("Sector", style={'marginRight': '10px'}),
+        dcc.Dropdown(
+            options=[{'label': 'Alle', 'value': 'ALL'}] + [{'label': s, 'value': s} for s in sectors],
+            value='ALL',
+            id='sector-filter',
+            style={'width': '280px'}
+        ),
+
+        html.Label("Index", style={'marginLeft': '30px', 'marginRight': '30px'}),
+        dcc.Dropdown(
+            options=[{'label': 'Alle', 'value': 'ALL'}] + [{'label': i, 'value': i} for i in indices],
+            value='ALL',
+            id='index-filter',
+            style={'width': '280px'}
+        ),
+    ], style={'fontFamily': 'Roboto, sans-serif','display': 'flex', 'alignItems': 'center', 'padding': '10px'}),
+
+    # stock cards
+    html.Div(id='chart-container', style={
+        'display': 'grid',
+        'gridTemplateColumns': 'repeat(auto-fit, minmax(350px, 1fr))',
+        'gap': '35px',
+        'padding': '20px'
+    })
+])
+
+@app.callback(
+    Output('chart-container', 'children'),
+    Input('sector-filter', 'value'),
+    Input('index-filter', 'value')
+)
+def update_cards(sector, index):
+    filtered = data
+    if sector != 'ALL':
+        filtered = [d for d in filtered if d.get("sector") == sector]
+    if index != 'ALL':
+        filtered = [d for d in filtered if d.get("index") == index]
+
+    return [create_company_card(entry) for entry in filtered]
+
 
 if __name__ == '__main__':
     app.run(debug=True)

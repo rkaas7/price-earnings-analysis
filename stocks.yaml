@@ -1,35 +1,204 @@
 stocks:
-  
-  - symbol: WMT # Walmart
+
+  # Konsumgüter & Einzelhandel
+  - symbol: WMT
+    name: Walmart
     long_term_avg_pe: 23.5
+    sector: Consumer Staples
+    index: S&P 500
 
-  - symbol: PG # Procter & Gamble
-  - symbol: NKE # Nike
-  - symbol: UNLYF # Unilever
-  - symbol: HSY # The Hershey Company
-  - symbol: KO # Coca Cola
-  - symbol: JNJ # Johnson and Johnson
-  - symbol: MMM # 3M
-  - symbol: PEP # Pepsi Co
-  - symbol: MDLZ # Mondelez
-  - symbol: CVX # Chevron
-  - symbol: CAT # Caterpillar 
-  - symbol: XOM # Exxon Mobil
-  - symbol: IBM # IBM
-  - symbol: LIN # Linde
-  - symbol: MCD # Mc Donalds
-  - symbol: BUD # AB InBev
+  - symbol: PG
+    name: Procter & Gamble
+    long_term_avg_pe: 24.0
+    sector: Consumer Staples
+    index: S&P 500
 
-# Note: REITS do not make sense (better to look at Funds from Operations (FFO))
+  - symbol: NKE
+    name: Nike
+    long_term_avg_pe: 30.0
+    sector: Consumer Discretionary
+    index: S&P 500
 
-# limited data for german stocks with yfinance
-  - symbol: BAS.DE # BASF
-  - symbol: VOW3.DE # Volkswagen
-  - symbol: ALV.DE # Allianz
-  - symbol: DHL.DE # Deutsche Post
-  - symbol: SIX3.F # Sixt SE
-  - symbol: DTE.DE # Deutsche Telekom
+  - symbol: UNLYF
+    name: Unilever
+    long_term_avg_pe: 19.0
+    sector: Consumer Staples
+    index: MSCI World
 
-# Benchmark indices
-  - symbol: SPY # S&P 500 ETF
-  - symbol: EXS1.DE  # DAX ETF (XETRA)
+  - symbol: HSY
+    name: The Hershey Company
+    long_term_avg_pe: 25.0
+    sector: Consumer Staples
+    index: S&P 500
+
+  - symbol: KO
+    name: Coca Cola
+    long_term_avg_pe: 24.0
+    sector: Consumer Staples
+    index: S&P 500
+
+  - symbol: PEP
+    name: PepsiCo
+    long_term_avg_pe: 23.5
+    sector: Consumer Staples
+    index: S&P 500
+
+  - symbol: MDLZ
+    name: Mondelez
+    long_term_avg_pe: 21.0
+    sector: Consumer Staples
+    index: S&P 500
+
+  # Gesundheit
+  - symbol: JNJ
+    name: Johnson & Johnson
+    long_term_avg_pe: 17.0
+    sector: Health Care
+    index: S&P 500
+
+  - symbol: ABBV
+    name: AbbVie
+    long_term_avg_pe: 15.0
+    sector: Health Care
+    index: S&P 500
+
+  - symbol: ABT
+    name: Abbott Laboratories
+    long_term_avg_pe: 22.0
+    sector: Health Care
+    index: S&P 500
+
+  - symbol: MRK
+    name: Merck & Co.
+    long_term_avg_pe: 15.5
+    sector: Health Care
+    index: S&P 500
+
+  - symbol: PFE
+    name: Pfizer
+    long_term_avg_pe: 13.0
+    sector: Health Care
+    index: S&P 500
+
+  # Industrie & Energie
+  - symbol: MMM
+    name: 3M
+    long_term_avg_pe: 18.0
+    sector: Industrials
+    index: S&P 500
+
+  - symbol: CAT
+    name: Caterpillar
+    long_term_avg_pe: 16.5
+    sector: Industrials
+    index: S&P 500
+
+  - symbol: XOM
+    name: Exxon Mobil
+    long_term_avg_pe: 14.0
+    sector: Energy
+    index: S&P 500
+
+  - symbol: CVX
+    name: Chevron
+    long_term_avg_pe: 13.5
+    sector: Energy
+    index: S&P 500
+
+  - symbol: RTX
+    name: Raytheon Technologies
+    long_term_avg_pe: 17.0
+    sector: Industrials
+    index: S&P 500
+
+  # Technologie
+  - symbol: IBM
+    name: IBM
+    long_term_avg_pe: 13.0
+    sector: Information Technology
+    index: S&P 500
+
+  - symbol: TXN
+    name: Texas Instruments
+    long_term_avg_pe: 22.0
+    sector: Information Technology
+    index: S&P 500
+
+  - symbol: INTC
+    name: Intel
+    long_term_avg_pe: 14.0
+    sector: Information Technology
+    index: S&P 500
+
+  - symbol: ADP
+    name: Automatic Data Processing
+    long_term_avg_pe: 25.0
+    sector: Information Technology
+    index: S&P 500
+
+  - symbol: LIN
+    name: Linde plc
+    long_term_avg_pe: 28.0
+    sector: Materials
+    index: S&P 500
+
+  # Restaurants & Getränke
+  - symbol: MCD
+    name: McDonald's
+    long_term_avg_pe: 25.0
+    sector: Consumer Discretionary
+    index: S&P 500
+
+  - symbol: SBUX
+    name: Starbucks
+    long_term_avg_pe: 30.0
+    sector: Consumer Discretionary
+    index: S&P 500
+
+  - symbol: BUD
+    name: AB InBev
+    long_term_avg_pe: 22.0
+    sector: Consumer Staples
+    index: MSCI World
+
+  # Deutsche Aktien
+  - symbol: BAS.DE
+    name: BASF
+    sector: Materials
+    index: DAX
+
+  - symbol: VOW3.DE
+    name: Volkswagen
+    sector: Consumer Discretionary
+    index: DAX
+
+  - symbol: ALV.DE
+    name: Allianz
+    sector: Financials
+    index: DAX
+
+  - symbol: DHL.DE
+    name: Deutsche Post
+    sector: Industrials
+    index: DAX
+
+  - symbol: SIX3.F
+    name: Sixt SE
+    sector: Industrials
+    index: DAX
+
+  - symbol: DTE.DE
+    name: Deutsche Telekom
+    sector: Communication Services
+    index: DAX
+
+  # Benchmarks
+  - symbol: SPY
+    name: S&P 500 ETF
+    sector: Index
+    index: Benchmark
+
+  - symbol: EXS1.DE
+    name: DAX ETF (XETRA)
+    sector: Index
+    index: Benchmark

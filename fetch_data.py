@@ -16,20 +16,9 @@ def fetch_pe_data(stock):
     ticker = yf.Ticker(symbol)
     
     info = ticker.info
-    name = info.get('longName', symbol)
-    # if symbol == "BAS.DE":
-    #     print(info)
+    name = stock.get('name', info.get('longName', symbol)) # use manually added name, or get by api via symbol
     
     try:
-        # if symbol == 'SPY': # check what the api actually provides
-        #    print(info)
-           
-        # fix names for benchmark indices
-        if symbol == "SPY":
-            name = "S&P 500 (via SPY)"
-        elif symbol == "EXS1.DE":
-            name = "DAX (via EXS1.DE)"
-
         trailing_pe = info.get('trailingPE', None)
         forward_pe = info.get('forwardPE', None)
         eps = info.get('trailingEps', None)
@@ -50,7 +39,7 @@ def fetch_pe_data(stock):
     # estimate historical P/E if it is not manually given ... 
     pe_ratios = []
     
-    if longterm_avg_pe is None:
+    if longterm_avg_pe is None: # not given, then ...
         end = datetime.today()
 
         for i in range(10):
@@ -72,6 +61,7 @@ def fetch_pe_data(stock):
         "trailing_pe": trailing_pe,
         "forward_pe": forward_pe,
         "longterm_avg_pe": longterm_avg_pe,
-        #"longterm_avg_pe": fetch_10y_avg_pe(symbol)
-        "longterm_pe_source": "manually added" if "long_term_avg_pe" in stock else "estimated"
+        "longterm_pe_source": "manually added" if "long_term_avg_pe" in stock else "estimated",
+        'sector': stock.get('sector', "Unbekannt"),
+        'index': stock.get('index', "Unbekannt")
     }
