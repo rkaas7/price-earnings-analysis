@@ -3,7 +3,7 @@ from dash import html, dcc, Input, Output
 import plotly.graph_objs as go
 from read_yaml import read_stock_symbols
 from fetch_data import fetch_pe_data
-
+from tqdm import tqdm
 
 
 external_stylesheets = [
@@ -21,8 +21,18 @@ BAR_WIDTH = 0.20
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.title = "Price/Earnings analysis for Lifetime Investments"
 
+data = [] # fundamentals for all stocks
+
 symbols = read_stock_symbols()
-data = [fetch_pe_data(sym) for sym in symbols]
+print("🔍 Fetch fundamentals ...")
+for sym in tqdm(symbols, desc="YAHOO Finance", ncols=80):
+    try:
+        entry = fetch_pe_data(sym)
+        data.append(entry)
+    except Exception as e:
+        print(f"⚠️ Could not load data {sym}: {e}")
+
+print(f"\n✅ Fully retrieved fundamentals for all stocks (number: {len(data)} ) \n")
 
 def safe_value(v):
     return max(0, round(v, 2)) if isinstance(v, (int, float)) else 0
@@ -121,5 +131,5 @@ def update_cards(sector, index):
     return [create_company_card(entry) for entry in filtered]
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, use_reloader=False)

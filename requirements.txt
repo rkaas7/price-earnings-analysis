@@ -1,3 +1,4 @@
 dash
 yfinance
 PyYAML
+tqdm
