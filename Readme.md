@@ -1,17 +1,18 @@
-# 📊 Price/Earnings analysis for Lifetime Investments
+# 📊 Price/Earnings analysis for your Watchlist of longterm Investments
 
-This tool provides a clean and insightful web interface to visualize **Price/Earnings ratios (P/E)** of selected companies, helping long-term investors identify **potentially undervalued stocks**.
+This tool provides a clean and insightful web interface to visualize Price/Earnings ratios (P/E) of selected companies, helping to identify potentially undervalued stocks.
 
+**Keep in mind:** P/E ratios aren’t the full story - but they’re a great way to get a quick sense of how your favorite companies (e.g. some Consumer Staples) are currently valued. It’s not about drawing conclusions at a glance, but spotting where things look interesting enough to dig deeper.
 
 ![image](dashboard.png)
 
 The dashboard displays:
 
 - **Trailing P/E**: Price divided by the most recent 12-month earnings.
-- **Forward P/E**: Price divided by projected 12-month earnings.
+- **Forward P/E**: Price divided by projected 12-month earnings ('forwardPE' from yfinance).
 - **Long-Term Average P/E**: Historical valuation benchmark (manually defined, or estimated by the tool (data not available on yahoo finance) ).
 
-With filters for **index** and **sector**, investors can quickly screen and compare current valuations against historical averages and identify historically cheap companies for further analysis.
+Use filters for **index** and **sector**. 
 
 **Data is fetched from Yahoo Finance (via yfinance)**
 
